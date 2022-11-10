@@ -9,7 +9,7 @@ import SettingPage from "./pages/SettingPage.tsx";
 
 import MapPage from "./pages/MapSubPages/MapPage.tsx";
 import MapSearchPage from "./pages/MapSubPages/SearchPage.tsx";
-import OrderStateWaitingPage from "./pages/OrderSubPages/OrderStateWaitingPage.tsx";
+import OrderStateWaitingPage from "./pages/OrderSubPages/OrderStateWaitingPage";
 
 import {
   IconHome2,
@@ -53,7 +53,7 @@ const firstNestSubPages = {
       label: "주문 접수 대기",
       key: "state_waiting",
       link: "/state_wating",
-      component: <EmptyComp />,
+      component: <OrderStateWaitingPage />,
     },
     {
       label: "조리 중",
