@@ -1,8 +1,16 @@
 import MainPage from "./pages/MainPage.tsx";
 import OrderPage from "./pages/OrderPage.tsx";
-import ShopInfoPage from "./pages/ShopInfo.tsx";
+import ShopInfoPage from "./pages/ShopInfoPage.tsx";
 import MyPage from "./pages/MyPage.tsx";
 import LocalBrandingPage from "./pages/LocalBrandingPage.tsx";
+import SettingPage from "./pages/SettingPage.tsx";
+
+
+
+import MapPage from "./pages/MapSubPages/MapPage.tsx";
+import MapSearchPage from "./pages/MapSubPages/SearchPage.tsx";
+import OrderStateWaitingPage from "./pages/OrderSubPages/OrderStateWaitingPage.tsx";
+
 import {
   IconHome2,
   IconGauge,
@@ -13,26 +21,25 @@ import {
   IconSettings,
 } from "@tabler/icons";
 
-import { KakaoMap } from "./components/Maps/KakaoMap.tsx";
 
-const EmptyComp = () => {
+const EmptyComp = ({title}) => {
   return <></>;
 };
 // 각 서브페이지는 동일한 헤더를 가진다
 const firstNestSubPages = {
   mapSubPages: [
-    { label: "지도보기", key: "map", link: "/", component: <KakaoMap /> },
+    { label: "지도보기", key: "map", link: "/map", component: <MapPage /> },
     {
       label: "검색창",
       key: "search",
       link: "/search",
-      component: <KakaoMap />,
+      component: <MapSearchPage />,
     },
     {
       label: "히스토리",
       key: "history",
       link: "/history",
-      component: <EmptyComp />,
+      component: <EmptyComp title={"history"}/>,
     },
     {
       label: "리스트로 보기",
@@ -44,8 +51,8 @@ const firstNestSubPages = {
   orderSubPages: [
     {
       label: "주문 접수 대기",
-      key: "state_ready",
-      link: "/state_ready",
+      key: "state_waiting",
+      link: "/state_wating",
       component: <EmptyComp />,
     },
     {
@@ -150,7 +157,7 @@ export const mainRoutesList = {
     label: "로컬 브랜딩",
     icon: IconUser,
     link: "/local-branding",
-    component: <OrderPage />,
+    component: <LocalBrandingPage />,
     subPages: firstNestSubPages.localBrandingSubPages,
   },
   shopInfo: {
@@ -171,7 +178,7 @@ export const mainRoutesList = {
     label: "내 설정",
     icon: IconSettings,
     link: "/setting",
-    component: <MyPage />,
+    component: <SettingPage />,
     subPages: firstNestSubPages.settingSubPages,
   },
 };

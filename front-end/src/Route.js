@@ -2,22 +2,44 @@ import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { mainRoutesList } from "./RouteManifast";
 
-function genSubPages(arraySubPages) {
-  return arraySubPages.map((e) => {
-    <Route path={e.link} element={e.component} />;
-  });
+let instance = null;
+class SubPageRoutesSingleTon{
+  static instance;
+ 
+  constructor(){
+    if(instance) return instance;
+    this.mapSubPages = this.genSubPages(mainRoutesList.map.subPages);
+    this.orderSubPages = this.genSubPages(mainRoutesList.order.subPages);
+    this.localBrandingSubPages = this.genSubPages(
+      mainRoutesList.localBranding.subPages
+    );
+    this.shopInfoSubPages = this.genSubPages(mainRoutesList.localBranding.subPages);
+    this.myPageSubPages = this.genSubPages(mainRoutesList.shopInfo.subPages);
+    this.settingSubPages = this.genSubPages(mainRoutesList.setting.subPages);
+    instance = this;
+  }
+
+  subPages () {
+    return { 
+      mapSubPages: this.mapSubPages, 
+      orderSubPages: this.orderSubPages, 
+      localBrandingSubPages: this.localBrandingSubPages, 
+      shopInfoSubPages: this.shopInfoSubPages, 
+      myPageSubPages: this.myPageSubPages, 
+      settingSubPages: this.settingSubPages
+    }
+  }
+
+  genSubPages(arraySubPages) {
+    return arraySubPages.map((e) => {
+      <Route path={e.link} element={e.component} />;
+    });
+  }
 }
 
 function Router({ children }) {
-  const mapSubPages = genSubPages(mainRoutesList.map.subPages);
-  const orderSubPages = genSubPages(mainRoutesList.order.subPages);
-  const localBrandingSubPages = genSubPages(
-    mainRoutesList.localBranding.subPages
-  );
-  const shopInfoSubPages = genSubPages(mainRoutesList.localBranding.subPages);
-  const myPageSubPages = genSubPages(mainRoutesList.shopInfo.subPages);
-  const settingSubPages = genSubPages(mainRoutesList.setting.subPages);
-
+  const subPages = new SubPageRoutesSingleTon();
+  
   return (
     <BrowserRouter>
       {children}
@@ -27,7 +49,7 @@ function Router({ children }) {
           path={mainRoutesList.map.link}
           element={mainRoutesList.map.component}
         />
-        {mapSubPages}
+        {subPages.mapSubPages}
         <Route
           path={mainRoutesList.order.link}
           element={mainRoutesList.order.component}

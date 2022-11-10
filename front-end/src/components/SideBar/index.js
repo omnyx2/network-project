@@ -15,6 +15,8 @@ import {
   IconUser,
   IconSettings,
 } from "@tabler/icons";
+import { useRecoilState } from 'recoil';
+import { mapActiveSubComponent } from '../../recoils/RecoilsList.tsx'
 import { MantineLogo } from "@mantine/ds";
 
 import { Link } from "react-router-dom";
@@ -191,6 +193,7 @@ export function DoubleNavbar() {
   // 현재 선택된 라우팅 객체 지정
   const [activeNavItem, setActiveItem] = useState(mainLinksMockdata[0]);
   const [activeLink, setActiveLink] = useState("Settings");
+  const [activeComponent, setActiveComponent] = useRecoilState(mapActiveSubComponent);
   const baseUrl = "localhost:3000";
 
   const mainLinks = mainLinksMockdata.map((navItem) => (
@@ -224,13 +227,15 @@ export function DoubleNavbar() {
 
   const links = activeNavItem.subPages.map((link) => (
     <Link
+      to={`${activeNavItem.link}${link.link}`}
       className={cx(classes.link, {
         [classes.linkActive]: activeLink === link.key,
       })}
-      to={`${activeNavItem.link}${link.link}`}
       onClick={(event) => {
         event.preventDefault();
         setActiveLink(link.key);
+        console.log(link,activeNavItem.link);
+        setActiveComponent(link.component)
       }}
       key={link.key}
     >
@@ -253,9 +258,11 @@ export function DoubleNavbar() {
           <Title order={4} className={classes.title}>
             {active}
           </Title>
-          {links}
+          { links }
+         
         </div>
       </Navbar.Section>
     </Navbar>
+
   );
 }

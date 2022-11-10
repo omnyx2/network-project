@@ -7,27 +7,11 @@ import { KakaoMap } from '../components/Maps/KakaoMap.tsx'
 import { Flex, Button, Box } from '@mantine/core';
 function MyPage () {
     return (
-      <>
-      <Flex style={{width: "100wv", height: "100vh" }}>
- 
-        {/* <UsersTable data={data0} /> */}
-        <Box style={{width: "auto"}}>
-        <StatsControls />
-        <StatsControls />
+
+        <>
+            MyPageMainPage
+        </>
   
-        </Box>
-       
-       
-        {/* <FeaturesCard />
-        <FeaturesCard />
-        <FeaturesCard /> */}
-            <KakaoMap />
-      </Flex>
-  
-       
-     
-      </>
-      
     )
   }
   

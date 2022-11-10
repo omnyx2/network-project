@@ -4,12 +4,15 @@ import App from './App';
 import { MatinerTheme } from './theme/ThemeObject';
 
 import reportWebVitals from './reportWebVitals';
-
+import RecoilRootProvider from './recoils/RecoilRootProvider'
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <MatinerTheme>
-       <App />
+      <RecoilRootProvider>
+        <App />
+      </RecoilRootProvider>
+       
     </MatinerTheme>
   </React.StrictMode>
 );

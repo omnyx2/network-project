@@ -63,19 +63,9 @@ const data = {};
 function MainPage() {
   return (
     <>
-      <Flex style={{ width: "100wv", height: "100vh" }}>
-        {/* <UsersTable data={data0} /> */}
-        <Box style={{ width: "auto" }}>
-          <StatsControls />
-          <StatsControls />
-        </Box>
-
-        {/* <FeaturesCard />
-      <FeaturesCard />
-      <FeaturesCard /> */}
-        <KakaoMap />
-      </Flex>
+    
     </>
+    
   );
 }
 
