@@ -20,10 +20,23 @@ export const subHomeNavState = atom({
   default: 'Search', // default value (aka initial value)
 });
 
+export const mainNavRecoder = atom({
+  key: 'mainNavRecoder', // unique ID (with respect to other atoms/selectors)
+  default: 'map', 
+})
+
+export const  = atom({
+  key: 'mainNavRecoder', // unique ID (with respect to other atoms/selectors)
+  default: 'map', 
+})
+
 export const mapActiveSubComponent = atom({
   key: 'mapActiveSubComponent', // unique ID (with respect to other atoms/selectors)
   default: mainRoutesList.map.component, // default value (aka initial value)
 });
+
+
+export const mainActiveComponent = atom
 
 // interface order {
 //  id, menu_item(options), num, order_time, order_date, order_table, order_state
@@ -38,6 +51,3 @@ export const orderQueue = atom({
 //   default: false,
 //   effects_UNSTABLE: [persistAtom],
 // });
-
-
-

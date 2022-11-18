@@ -6,16 +6,17 @@ import { mainRoutesList } from "./RouteManifast";
 
  import { useRecoilState } from 'recoil';
 import { mapActiveSubComponent } from './recoils/RecoilsList.tsx'
+
 function App() {
-  const [activeComponent, setActiveComponent] = useRecoilState(mapActiveSubComponent);
+  const [activeComponent, setActiveComponent ] = useRecoilState(mapActiveSubComponent)
   return (
     <div className="App">
 
     <Flex style={{ width: "100wv", height: "100vh" }}>
         <Router>
           <DoubleNavbar style={{ height: "100vh" }} />
-          { activeComponent }
         </Router>
+        { activeComponent }
     </Flex>
     </div>
   );

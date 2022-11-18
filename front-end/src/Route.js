@@ -44,31 +44,28 @@ function Router({ children }) {
     <BrowserRouter>
       {children}
       <Routes>
-        <Route path="/" element={mainRoutesList.map.component} />
-        <Route
-          path={mainRoutesList.map.link}
-          element={mainRoutesList.map.component}
-        />
+        {/* <Route path="/map" element={mainRoutesList.map.subPages[0].component} /> */}
+       
         {subPages.mapSubPages}
         <Route
           path={mainRoutesList.order.link}
-          element={mainRoutesList.order.component}
+          // element={mainRoutesList.order.subPages[0].component}
         />
         <Route
           path={mainRoutesList.localBranding.link}
-          element={mainRoutesList.localBranding.component}
+          // element={mainRoutesList.localBranding.component}
         />
         <Route
           path={mainRoutesList.shopInfo.link}
-          element={mainRoutesList.shopInfo.component}
+          // element={mainRoutesList.shopInfo.component}
         />
         <Route
           path={mainRoutesList.myPage.link}
-          element={mainRoutesList.myPage.component}
+          // element={mainRoutesList.myPage.component}
         />
         <Route
           path={mainRoutesList.setting.link}
-          element={mainRoutesList.setting.component}
+          // element={mainRoutesList.setting.component}
         />
       </Routes>
     </BrowserRouter>

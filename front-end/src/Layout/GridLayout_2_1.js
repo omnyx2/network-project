@@ -16,15 +16,15 @@ function LeadGrid({CompOne, CompTwo}) {
   
   return (
     <Container>
-      <Grid col={2} spacing="md">
-          <Grid.Col >
-           <Skeleton height={PRIMARY_COL_HEIGHT} radius="md" animate={false} />
-          </Grid.Col>
+        <SimpleGrid cols={2}>
+
+           <Skeleton radius="md" animate={false} />
+        
           
-          <Grid.Col >
+          
             { isEmptyComp(CompTwo) }
-          </Grid.Col>
-        </Grid>
+   
+        </SimpleGrid>
       </Container>
   );
 }

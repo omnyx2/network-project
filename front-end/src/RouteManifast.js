@@ -11,6 +11,12 @@ import MapPage from "./pages/MapSubPages/MapPage.tsx";
 import MapSearchPage from "./pages/MapSubPages/SearchPage.tsx";
 import OrderStateWaitingPage from "./pages/OrderSubPages/OrderStateWaitingPage";
 
+
+import LocalBrandingMenuPage from "./pages/LocalBrandingPages/LocalBrandingMenuPage.tsx";
+import LocalBrandStoryPage from "./pages/LocalBrandingPages/LocalBrandStoryPage.tsx";
+import ShopOuterPicturePage from "./pages/LocalBrandingPages/ShopOuterPicturePage.tsx";
+import ShopInnerPicturePage from "./pages/LocalBrandingPages/ShopInnerPicturePage.tsx";
+
 import {
   IconHome2,
   IconGauge,
@@ -79,25 +85,25 @@ const firstNestSubPages = {
       label: "메뉴판 관리",
       key: "menu_board",
       link: "/menu_board",
-      component: <EmptyComp />,
+      component: <LocalBrandingMenuPage />,
     },
     {
       label: "매장 내부 사진",
       key: "shop_in",
       link: "/shop_in",
-      component: <EmptyComp />,
+      component: <ShopInnerPicturePage />,
     },
     {
       label: "매장 외부사진",
       key: "shop_out",
       link: "/shop_out",
-      component: <EmptyComp />,
+      component: <ShopOuterPicturePage />,
     },
     {
       label: "매장 스토리",
       key: "shop_story",
       link: "/shop_story",
-      component: <EmptyComp />,
+      component: <LocalBrandStoryPage />,
     },
   ],
   shopInfoPageSubPages: [
