@@ -1,26 +1,38 @@
-
-import { useState } from 'react';
-import dayjs from 'dayjs';
-import { createStyles, UnstyledButton, Text, Paper, Group, Flex } from '@mantine/core';
-import { IconSwimming, IconBike, IconRun, IconChevronDown, IconChevronUp } from '@tabler/icons';
-import { FeaturesCard } from './CardItem.tsx';
+import { useState } from "react";
+import dayjs from "dayjs";
+import {
+  createStyles,
+  UnstyledButton,
+  Text,
+  Paper,
+  Group,
+  Flex,
+} from "@mantine/core";
+import {
+  IconSwimming,
+  IconBike,
+  IconRun,
+  IconChevronDown,
+  IconChevronUp,
+} from "@tabler/icons";
+import { FeaturesCard } from "./CardItem.tsx";
 const useStyles = createStyles((theme) => ({
   root: {
-    backgroundImage: `linear-gradient(-60deg, ${theme.colors[theme.primaryColor][4]} 0%, ${
-      theme.colors[theme.primaryColor][7]
-    } 100%)`,
+    backgroundImage: `linear-gradient(-60deg, ${
+      theme.colors[theme.primaryColor][4]
+    } 0%, ${theme.colors[theme.primaryColor][7]} 100%)`,
     padding: theme.spacing.xl,
     borderRadius: theme.radius.md,
-    display: 'flex',
+    display: "flex",
 
-    [theme.fn.smallerThan('xs')]: {
-      flexDirection: 'column',
+    [theme.fn.smallerThan("xs")]: {
+      flexDirection: "column",
     },
   },
 
   icon: {
-    marginLeft: 'auto',
-    marginRight: 'auto',
+    marginLeft: "auto",
+    marginRight: "auto",
     marginTop: theme.spacing.lg,
     color: theme.colors[theme.primaryColor][6],
   },
@@ -29,15 +41,15 @@ const useStyles = createStyles((theme) => ({
     minWidth: 98,
     paddingTop: theme.spacing.xl,
     minHeight: 140,
-    display: 'flex',
+    display: "flex",
     flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'space-between',
+    flexDirection: "column",
+    justifyContent: "space-between",
     backgroundColor: theme.white,
   },
 
   label: {
-    textTransform: 'uppercase',
+    textTransform: "uppercase",
     fontWeight: 700,
     fontSize: theme.fontSizes.xs,
     fontFamily: `Greycliff CF, ${theme.fontFamily}`,
@@ -60,7 +72,7 @@ const useStyles = createStyles((theme) => ({
     fontWeight: 700,
     color: theme.white,
     lineHeight: 1,
-    textAlign: 'center',
+    textAlign: "center",
     marginBottom: 5,
     fontFamily: `Greycliff CF, ${theme.fontFamily}`,
   },
@@ -69,17 +81,17 @@ const useStyles = createStyles((theme) => ({
     fontSize: theme.fontSizes.sm,
     color: theme.white,
     lineHeight: 1,
-    textAlign: 'center',
+    textAlign: "center",
   },
 
   controls: {
-    display: 'flex',
-    flexDirection: 'column',
+    display: "flex",
+    flexDirection: "column",
     marginRight: theme.spacing.xl * 2,
 
-    [theme.fn.smallerThan('xs')]: {
-      flexDirection: 'row',
-      alignItems: 'center',
+    [theme.fn.smallerThan("xs")]: {
+      flexDirection: "row",
+      alignItems: "center",
       marginRight: 0,
       marginBottom: theme.spacing.xl,
     },
@@ -87,49 +99,49 @@ const useStyles = createStyles((theme) => ({
 
   date: {
     flex: 1,
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
   },
 
   control: {
     height: 28,
-    width: '100%',
+    width: "100%",
     color: theme.colors[theme.primaryColor][2],
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
     borderRadius: theme.radius.md,
-    transition: 'background-color 50ms ease',
+    transition: "background-color 50ms ease",
 
-    [theme.fn.smallerThan('xs')]: {
+    [theme.fn.smallerThan("xs")]: {
       height: 34,
       width: 34,
     },
 
-    '&:hover': {
+    "&:hover": {
       backgroundColor: theme.colors[theme.primaryColor][5],
       color: theme.white,
     },
   },
 
   controlIcon: {
-    [theme.fn.smallerThan('xs')]: {
-      transform: 'rotate(-90deg)',
+    [theme.fn.smallerThan("xs")]: {
+      transform: "rotate(-90deg)",
     },
   },
   verticleControls: {
-    height: '33vh',
-    dislplay: 'flex',
-    overflowY: 'hidden',
-    flexDirection: 'column'
-  }
+    height: "33vh",
+    dislplay: "flex",
+    overflowY: "hidden",
+    flexDirection: "column",
+  },
 }));
 
 const data = [
-  { icon: IconRun, label: 'Running' },
-  { icon: IconSwimming, label: 'Swimming' },
-  { icon: IconBike, label: 'Bike' },
+  { icon: IconRun, label: "Running" },
+  { icon: IconSwimming, label: "Swimming" },
+  { icon: IconBike, label: "Bike" },
 ];
 
 export function StatsControls() {
@@ -151,27 +163,33 @@ export function StatsControls() {
 
   return (
     <div className={classes.root}>
-      <div className={classes.controls}>
+     
         <UnstyledButton
           className={classes.control}
-          onClick={() => setDate((current) => dayjs(current).add(1, 'day').toDate())}
+          onClick={() =>
+            setDate((current) => dayjs(current).add(1, "day").toDate())
+          }
         >
           <IconChevronUp className={classes.controlIcon} stroke={1.5} />
         </UnstyledButton>
 
         <div className={classes.date}>
-          <Text className={classes.day}>{dayjs(date).format('DD')}</Text>
-          <Text className={classes.month}>{dayjs(date).format('MMMM')}</Text>
+          <Text className={classes.day}>{dayjs(date).format("DD")}</Text>
+          <Text className={classes.month}>{dayjs(date).format("MMMM")}</Text>
         </div>
 
         <UnstyledButton
           className={classes.control}
-          onClick={() => setDate((current) => dayjs(current).subtract(1, 'day').toDate())}
+          onClick={() =>
+            setDate((current) => dayjs(current).subtract(1, "day").toDate())
+          }
         >
           <IconChevronDown className={classes.controlIcon} stroke={1.5} />
         </UnstyledButton>
       </div>
-      <Group className={classes.verticleControls}sx={{ flex: 1 }}>{stats}</Group>
+      <Group className={classes.verticleControls} sx={{ flex: 1 }}>
+        {stats}
+      </Group>
     </div>
   );
 }

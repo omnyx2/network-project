@@ -3,70 +3,59 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { mainRoutesList } from "./RouteManifast";
 
 let instance = null;
-class SubPageRoutesSingleTon{
-  static instance;
- 
-  constructor(){
-    if(instance) return instance;
-    this.mapSubPages = this.genSubPages(mainRoutesList.map.subPages);
-    this.orderSubPages = this.genSubPages(mainRoutesList.order.subPages);
+class SubPageRoutesSingleTon {
+  constructor() {
+    if (instance) return instance;
+    this.mapSubPages = this.genSubPages(mainRoutesList, "map");
+    this.orderSubPages = this.genSubPages(mainRoutesList, "order");
     this.localBrandingSubPages = this.genSubPages(
-      mainRoutesList.localBranding.subPages
+      mainRoutesList,
+      "localBranding"
     );
-    this.shopInfoSubPages = this.genSubPages(mainRoutesList.localBranding.subPages);
-    this.myPageSubPages = this.genSubPages(mainRoutesList.shopInfo.subPages);
-    this.settingSubPages = this.genSubPages(mainRoutesList.setting.subPages);
+    this.shopInfoSubPages = this.genSubPages(mainRoutesList, "shopInfo");
+    this.myPageSubPages = this.genSubPages(mainRoutesList, "myPage");
+    this.settingSubPages = this.genSubPages(mainRoutesList, "setting");
     instance = this;
   }
 
-  subPages () {
-    return { 
-      mapSubPages: this.mapSubPages, 
-      orderSubPages: this.orderSubPages, 
-      localBrandingSubPages: this.localBrandingSubPages, 
-      shopInfoSubPages: this.shopInfoSubPages, 
-      myPageSubPages: this.myPageSubPages, 
-      settingSubPages: this.settingSubPages
-    }
+  subPages() {
+    return {
+      mapSubPages: this.mapSubPages,
+      orderSubPages: this.orderSubPages,
+      localBrandingSubPages: this.localBrandingSubPages,
+      shopInfoSubPages: this.shopInfoSubPages,
+      myPageSubPages: this.myPageSubPages,
+      settingSubPages: this.settingSubPages,
+    };
   }
 
-  genSubPages(arraySubPages) {
-    return arraySubPages.map((e) => {
-      <Route path={e.link} element={e.component} />;
-    });
+  genSubPages(mainRouteDict, keyOfDict) {
+    let arraySubPages = mainRouteDict[keyOfDict].subPages;
+
+    return arraySubPages.map((e, idx) => (
+      <Route
+        path={mainRouteDict[keyOfDict].link + e.link}
+        element={e.component}
+        key={mainRouteDict[keyOfDict].link + e.link}
+      />
+    ));
   }
 }
 
 function Router({ children }) {
-  const subPages = new SubPageRoutesSingleTon();
-  
+  const subPagesSingleTon = new SubPageRoutesSingleTon();
+  const subPages = subPagesSingleTon.subPages();
+  console.log(subPages);
   return (
     <BrowserRouter>
       {children}
       <Routes>
-        {/* <Route path="/map" element={mainRoutesList.map.subPages[0].component} /> */}
-       
-        {subPages.mapSubPages}
-        <Route
-          path={mainRoutesList.order.link}
-          // element={mainRoutesList.order.subPages[0].component}
-        />
-        <Route
-          path={mainRoutesList.localBranding.link}
-          // element={mainRoutesList.localBranding.component}
-        />
-        <Route
-          path={mainRoutesList.shopInfo.link}
-          // element={mainRoutesList.shopInfo.component}
-        />
-        <Route
-          path={mainRoutesList.myPage.link}
-          // element={mainRoutesList.myPage.component}
-        />
-        <Route
-          path={mainRoutesList.setting.link}
-          // element={mainRoutesList.setting.component}
-        />
+        {subPages?.mapSubPages}
+        {subPages?.orderSubPages}
+        {subPages?.localBrandingSubPages}
+        {subPages?.shopInfoSubPages}
+        {subPages?.myPageSubPages}
+        {subPages?.settingSubPages}
       </Routes>
     </BrowserRouter>
   );

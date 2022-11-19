@@ -1,6 +1,6 @@
 import { KakaoMap } from "../../components/Maps/KakaoMap.tsx";
-import React from "react";
-function MapPage() {
+
+function MyPage() {
   return (
     <>
       <KakaoMap />
@@ -8,4 +8,4 @@ function MapPage() {
   );
 }
 
-export default MapPage;
+export default MyPage;

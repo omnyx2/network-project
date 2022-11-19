@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   createStyles,
   Navbar,
@@ -15,12 +15,12 @@ import {
   IconUser,
   IconSettings,
 } from "@tabler/icons";
-import { useRecoilState } from 'recoil';
-import { mapActiveSubComponent } from '../../recoils/RecoilsList.tsx'
+import { useRecoilState } from "recoil";
+import { mapActiveSubComponent } from "../../recoils/RecoilsList.tsx";
 import { MantineLogo } from "@mantine/ds";
 
 import { Link } from "react-router-dom";
-import { mainRoutesList } from "../../RouteManifast";
+import { mainRoutesList, mainRoutesListArray } from "../../RouteManifast";
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -146,57 +146,33 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const mainLinksMockdata = [
-  {
-    icon: IconHome2,
-    label: mainRoutesList.map.label,
-    subPages: mainRoutesList.map.subPages,
-    link: mainRoutesList.map.link,
-  },
-  {
-    icon: IconGauge,
-    label: mainRoutesList.order.label,
-    subPages: mainRoutesList.order.subPages,
-    link: mainRoutesList.order.link,
-  },
-  // { icon: IconDeviceDesktopAnalytics, label: mainRoutesList.localBranding.label },
-  {
-    icon: IconCalendarStats,
-    label: mainRoutesList.shopInfo.label,
-    subPages: mainRoutesList.shopInfo.subPages,
-    link: mainRoutesList.shopInfo.link,
-  },
-  {
-    icon: IconUser,
-    label: mainRoutesList.localBranding.label,
-    subPages: mainRoutesList.localBranding.subPages,
-    link: mainRoutesList.localBranding.link,
-  },
-  {
-    icon: IconFingerprint,
-    label: mainRoutesList.myPage.label,
-    subPages: mainRoutesList.myPage.subPages,
-    link: mainRoutesList.myPage.link,
-  },
-  {
-    icon: IconSettings,
-    label: mainRoutesList.setting.label,
-    subPages: mainRoutesList.setting.subPages,
-    link: mainRoutesList.setting.link,
-  },
-];
+function makeUrl(mainIdx, idx) {
+  return (
+    mainRoutesListArray[mainIdx].link +
+    mainRoutesListArray[mainIdx].subPages[idx].link
+  );
+}
 
 // <Link to={`/`} className="link">Profile</Link>
 export function DoubleNavbar() {
   const { classes, cx } = useStyles();
   const [active, setActive] = useState("맵");
   // 현재 선택된 라우팅 객체 지정
-  const [activeNavItem, setActiveItem] = useState(mainLinksMockdata[0]);
-  const [activeLink, setActiveLink] = useState("Settings");
-  const [activeComponent, setActiveComponent] = useRecoilState(mapActiveSubComponent);
-  const baseUrl = "localhost:3000";
+  const [activeNavItem, setActiveItem] = useState(mainRoutesListArray[0]);
+  const [activeMainRoute, setAtiveMainRoute] = useState(mainRoutesListArray[0]);
 
-  const mainLinks = mainLinksMockdata.map((navItem) => (
+  // 현재 선택된 서브 라우팅 객체 기억
+  const [activeSubPageUrls, setActiveSubPageUrls] = useState([
+    makeUrl(0, 0),
+    makeUrl(1, 0),
+    makeUrl(2, 0),
+    makeUrl(3, 0),
+    makeUrl(4, 0),
+    makeUrl(5, 0),
+  ]);
+
+  const baseUrl = "localhost:3000";
+  const mainLinks = mainRoutesListArray.map((navItem, idx) => (
     <Tooltip
       label={navItem.label}
       position="right"
@@ -214,7 +190,7 @@ export function DoubleNavbar() {
         })}
       >
         <Link
-          to={`${navItem.link}`}
+          to={`${activeSubPageUrls[idx]}`}
           className={cx(classes.mainLink, {
             [classes.mainLinkActive]: navItem.label === active,
           })}
@@ -225,25 +201,30 @@ export function DoubleNavbar() {
     </Tooltip>
   ));
 
-  const links = activeNavItem.subPages.map((link) => (
+  const links = activeNavItem.subPages.map((link, idx) => (
     <Link
-      to={`${activeNavItem.link}${link.link}`}
+      to={makeUrl(mainRoutesListArray.indexOf(activeNavItem), idx)}
       className={cx(classes.link, {
-        [classes.linkActive]: activeLink === link.key,
+        [classes.linkActive]:
+          activeSubPageUrls[mainRoutesListArray.indexOf(activeNavItem)] ===
+          makeUrl(mainRoutesListArray.indexOf(activeNavItem), idx),
       })}
       onClick={(event) => {
-        event.preventDefault();
-        setActiveLink(link.key);
-        console.log(link,activeNavItem.link);
-        setActiveComponent(link.component)
+        // 1. 현재 메인 링크 찾기
+        // 2. 메인 링크의 서브링크 찾기
+        // 3. 메인 링크의 서브링크 변경하기
+
+        let mainIdx = mainRoutesListArray.indexOf(activeNavItem);
+        let newActiveSubPageUrls = [...activeSubPageUrls];
+        newActiveSubPageUrls[mainIdx] = makeUrl(mainIdx, idx);
+        setActiveSubPageUrls(newActiveSubPageUrls);
+        // event.preventDefault();
       }}
       key={link.key}
     >
       {link.label}
     </Link>
   ));
-
-  const CurrentComp = activeNavItem.subPages.find((e) => e.key === activeLink);
 
   return (
     <Navbar height={750} width={{ sm: 300 }}>
@@ -258,11 +239,9 @@ export function DoubleNavbar() {
           <Title order={4} className={classes.title}>
             {active}
           </Title>
-          { links }
-         
+          {links}
         </div>
       </Navbar.Section>
     </Navbar>
-
   );
 }

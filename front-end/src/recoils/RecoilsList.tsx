@@ -25,7 +25,7 @@ export const mainNavRecoder = atom({
   default: 'map', 
 })
 
-export const  = atom({
+export const a = atom({
   key: 'mainNavRecoder', // unique ID (with respect to other atoms/selectors)
   default: 'map', 
 })
