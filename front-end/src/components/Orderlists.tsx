@@ -163,30 +163,29 @@ export function StatsControls() {
 
   return (
     <div className={classes.root}>
-     
-        <UnstyledButton
-          className={classes.control}
-          onClick={() =>
-            setDate((current) => dayjs(current).add(1, "day").toDate())
-          }
-        >
-          <IconChevronUp className={classes.controlIcon} stroke={1.5} />
-        </UnstyledButton>
+      <UnstyledButton
+        className={classes.control}
+        onClick={() =>
+          setDate((current) => dayjs(current).add(1, "day").toDate())
+        }
+      >
+        <IconChevronUp className={classes.controlIcon} stroke={1.5} />
+      </UnstyledButton>
 
-        <div className={classes.date}>
-          <Text className={classes.day}>{dayjs(date).format("DD")}</Text>
-          <Text className={classes.month}>{dayjs(date).format("MMMM")}</Text>
-        </div>
-
-        <UnstyledButton
-          className={classes.control}
-          onClick={() =>
-            setDate((current) => dayjs(current).subtract(1, "day").toDate())
-          }
-        >
-          <IconChevronDown className={classes.controlIcon} stroke={1.5} />
-        </UnstyledButton>
+      <div className={classes.date}>
+        <Text className={classes.day}>{dayjs(date).format("DD")}</Text>
+        <Text className={classes.month}>{dayjs(date).format("MMMM")}</Text>
       </div>
+
+      <UnstyledButton
+        className={classes.control}
+        onClick={() =>
+          setDate((current) => dayjs(current).subtract(1, "day").toDate())
+        }
+      >
+        <IconChevronDown className={classes.controlIcon} stroke={1.5} />
+      </UnstyledButton>
+
       <Group className={classes.verticleControls} sx={{ flex: 1 }}>
         {stats}
       </Group>
