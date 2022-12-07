@@ -59,11 +59,11 @@ export function DropZoneButton() {
 
           <Text align="center" weight={700} size="lg" mt="xl">
             <Dropzone.Accept>Drop files here</Dropzone.Accept>
-            <Dropzone.Reject>Pdf file less than 30mb</Dropzone.Reject>
+            <Dropzone.Reject>Image file Only, 이미지 파일만 전송 가능합니다. JPG, PNG 지원</Dropzone.Reject>
             <Dropzone.Idle>Upload resume</Dropzone.Idle>
           </Text>
           <Text align="center" size="sm" mt="xs" color="dimmed">
-            Drag&apos;n&apos;drop files here to upload. We can accept only <i>.pdf</i> files that
+            Drag&apos;n&apos;drop files here to upload. We can accept only <i>.jpg</i> files that
             are less than 30mb in size.
           </Text>
         </div>

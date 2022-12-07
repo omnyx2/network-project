@@ -5,6 +5,7 @@ import MapSearchPage from "./pages/MapSubPages/MapSearchPage.tsx";
 import MapHistoryPage from "./pages/MapSubPages/MapHistoryPage.tsx";
 import MapAsList from "./pages/MapSubPages/MapAsList.tsx";
 
+import OrderStateAll from './pages/OrderSubPages/OrderStateAll'
 import OrderStateWaitingPage from "./pages/OrderSubPages/OrderStateWaitingPage";
 import OrderStateCookingPage from "./pages/OrderSubPages/OrderStateCookingPage";
 import OrderStateFinishedPage from "./pages/OrderSubPages/OrderStateFinishedPage";
@@ -14,6 +15,12 @@ import LocalBrandingMenuPage from "./pages/LocalBrandingPages/LocalBrandingMenuP
 import LocalBrandStoryPage from "./pages/LocalBrandingPages/LocalBrandStoryPage.tsx";
 import ShopInnerPicturePage from "./pages/LocalBrandingPages/ShopInnerPicturePage.tsx";
 import ShopOuterPicturePage from "./pages/LocalBrandingPages/ShopOuterPicturePage.tsx";
+
+import ShopWorkingInfoPage from "./pages/ShopInfoPages/ShopWorkingInfoPage.tsx";
+import ShopInfoPage from './pages/ShopInfoPages/ShopInfoPage.tsx';
+import ShopSalesInfoPage from './pages/ShopInfoPages/ShopSalesInfoPage.tsx';
+
+import MyPage from "./pages/MyPageSubPages/MyPage.tsx";
 
 import {
   IconHome2,
@@ -57,6 +64,12 @@ const firstNestSubPages = {
     },
   ],
   orderSubPages: [
+    {
+      label: "주문 전체창",
+      key: "state_all",
+      link: "/state_all",
+      component: <OrderStateAll />,
+    },
     {
       label: "주문 접수 대기",
       key: "state_waiting",
@@ -113,19 +126,19 @@ const firstNestSubPages = {
       label: "매장 정보",
       key: "shop_info",
       link: "/shop_info",
-      component: <EmptyComp />,
+      component: <ShopInfoPage />,
     },
     {
       label: "영업 정보",
-      key: "schedule_info",
-      link: "/schedule_info",
-      component: <EmptyComp />,
+      key: "working_info",
+      link: "/working_info",
+      component: <ShopWorkingInfoPage />,
     },
     {
       label: "매상 정보",
-      key: "earn_info",
-      link: "/earn_info",
-      component: <EmptyComp />,
+      key: "sales_info",
+      link: "/sales_info",
+      component: <ShopSalesInfoPage />,
     },
   ],
   myPageSubPages: [
@@ -133,7 +146,7 @@ const firstNestSubPages = {
       label: "내꿈궈",
       key: "my_page",
       link: "/my_page",
-      component: <EmptyComp />,
+      component: <MyPage/>,
     },
   ],
   settingSubPages: [

@@ -1,16 +1,31 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
+import './index.css';
 import { MatinerTheme } from "./theme/ThemeObject";
 
 import reportWebVitals from "./reportWebVitals";
 import RecoilRootProvider from "./recoils/RecoilRootProvider";
+
+
+import {
+  useQuery,
+  useMutation,
+  useQueryClient,
+  QueryClient,
+  QueryClientProvider,
+} from 'react-query'
+
+const queryClient = new QueryClient()
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <MatinerTheme>
-    <RecoilRootProvider>
-      <App />
-    </RecoilRootProvider>
+    <QueryClientProvider client={queryClient}>
+      <RecoilRootProvider>
+        <App />
+      </RecoilRootProvider>
+    </QueryClientProvider>
   </MatinerTheme>
 );
 

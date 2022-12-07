@@ -12,10 +12,10 @@ function App() {
     mapActiveSubComponent
   );
   return (
-    <div className="App">
-      <Flex style={{ width: "100wv", height: "100vh" }}>
+    <div className="App" style={{ width: "100wv", height: "100vh" }}>
+      <Flex style={{ width: "100%", height: "100%" }}>
         <Router>
-          <DoubleNavbar style={{ height: "100vh" }} />
+          <DoubleNavbar />
         </Router>
       </Flex>
     </div>

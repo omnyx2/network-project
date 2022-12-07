@@ -22,7 +22,7 @@ function LeadGrid({ CompOne, CompTwo }) {
   return (
     <Container>
       <SimpleGrid cols={2}>
-        <Skeleton radius="md" animate={false} />
+        {isEmptyComp(CompOne)}
         {isEmptyComp(CompTwo)}
       </SimpleGrid>
     </Container>

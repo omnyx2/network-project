@@ -1,7 +1,7 @@
 
 import { KakaoMap } from "../../components/Maps/KakaoMap.tsx";
 import GridLayout_2_1 from '../../Layout/GridLayout_2_1'
-import { DndList } from "../../components/DragAndDrop.tsx";
+
 function OrderStateWaitingPage () {
 
   return (

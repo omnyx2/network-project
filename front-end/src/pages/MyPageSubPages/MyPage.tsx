@@ -3,7 +3,7 @@ import { KakaoMap } from "../../components/Maps/KakaoMap.tsx";
 function MyPage() {
   return (
     <>
-      <KakaoMap />
+     문의하기
     </>
   );
 }

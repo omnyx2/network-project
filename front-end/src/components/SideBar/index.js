@@ -227,7 +227,7 @@ export function DoubleNavbar() {
   ));
 
   return (
-    <Navbar height={750} width={{ sm: 300 }}>
+    <Navbar height={'100%'} width={{ sm: 300 }}>
       <Navbar.Section grow className={classes.wrapper}>
         <div className={classes.aside}>
           <div className={classes.logo}>
