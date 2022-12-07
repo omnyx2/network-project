@@ -65,7 +65,7 @@ const data = [
 
 
 export const ShopOuterCardState = atom({
-    key: 'ShopinnerCardState', // unique ID (with respect to other atoms/selectors)
+    key: 'ShopOuterCardState', // unique ID (with respect to other atoms/selectors)
     default: data, // default value (aka initial value)
 });
   

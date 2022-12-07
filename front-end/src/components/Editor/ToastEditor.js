@@ -4,7 +4,7 @@ import { useRef } from 'react';
 import { Editor } from '@toast-ui/react-editor';
 import '@toast-ui/editor/dist/toastui-editor.css';
 // https://curryyou.tistory.com/470
-export default function ToastEditor() {
+export default function ToastEditor({height, handleOnChange}) {
 
   return (
     <div style={{ width: '100%', border: 'none'}}>
@@ -12,7 +12,7 @@ export default function ToastEditor() {
       <Editor
         placeholder="내용을 입력해주세요."
         previewStyle="vertical" // 미리보기 스타일 지정
-        height="100vh" // 에디터 창 높이
+        height={ height === undefined ? "100vh" : height } // 에디터 창 높이
         initialEditType="wysiwyg" // 초기 입력모드 설정(디폴트 markdown)
         toolbarItems={[
           // 툴바 옵션 설정

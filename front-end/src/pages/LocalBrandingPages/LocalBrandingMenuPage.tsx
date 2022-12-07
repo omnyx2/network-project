@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { RichTextEditor } from '@mantine/rte';
+import { DropZoneButton } from '../../components/DropZone/DropZoneButton.tsx';
+import { DragAndDropHeadList } from '../../components/DragAndDrop/DragAndDropHeadList.tsx';
 
 const initialValue =
   '<p>Your initial <b>html value</b> or an empty string to init editor without value</p>';
 
 function LocalBrandingMenuPage() {
   const [value, onChange] = useState(initialValue);
-  return <RichTextEditor value={value} onChange={onChange} id="rte" />;
+  return <DropZoneButton/>;
 }
 
 export default LocalBrandingMenuPage

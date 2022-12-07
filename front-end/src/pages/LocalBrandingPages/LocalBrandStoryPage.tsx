@@ -1,20 +1,38 @@
 import { useState } from 'react';
 import { RichTextEditor } from '@mantine/rte';
+import { Container, Flex, UnstyledButton, ActionIcon, Button } from '@mantine/core';
 import GridLayout_2_1 from '../../Layout/GridLayout_2_1';
 import ToastEditor from '../../components/Editor/ToastEditor';
-
+import { IconDatabase } from '@tabler/icons';
 const initialValue =
   '<p>Your initial <b>html value</b> or an empty string to init editor without value</p>';
+
+
+function HeadToolTips ({height}) {
+  return (
+    <div style={height}>
+      <Flex>
+        <Button.Group>
+        <UnstyledButton  variant="white"wi> <ActionIcon><IconDatabase size={16}/></ActionIcon>   </UnstyledButton>
+        <UnstyledButton  variant="white"> <ActionIcon><IconDatabase size={16}/></ActionIcon>   </UnstyledButton>
+        <UnstyledButton  variant="white"> <ActionIcon><IconDatabase size={16}/></ActionIcon>   </UnstyledButton>
+        <UnstyledButton  variant="white"> <ActionIcon><IconDatabase size={16}/></ActionIcon>   </UnstyledButton>
+        <UnstyledButton  variant="white"> <ActionIcon><IconDatabase size={16}/></ActionIcon>   </UnstyledButton>
+      </Button.Group>
+        </Flex>
+    </Container>
+  ) 
+}
 
 function LocalBrandStoryPage() {
   const [value, onChange] = useState(initialValue);
  
   
   return (<>
-    <ToastEditor />
-  {/* <GridLayout_2_1 
-    CompOne={<ToastEditor />}
-    CompTwo />*/ } 
+    <div style={{width:"100%"}}>
+      <HeadToolTips height="6vh"/>
+      <ToastEditor height={'95vh'}/>
+    </div>
     </>)
 }
 
