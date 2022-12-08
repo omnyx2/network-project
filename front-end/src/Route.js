@@ -33,7 +33,7 @@ class SubPageRoutesSingleTon {
     let arraySubPages = mainRouteDict[keyOfDict].subPages;
 
     return arraySubPages.map((e, idx) => (
-      <Route 
+      <Route
         path={mainRouteDict[keyOfDict].link + e.link}
         element={e.component}
         key={mainRouteDict[keyOfDict].link + e.link}
@@ -49,7 +49,7 @@ function Router({ children }) {
   return (
     <BrowserRouter>
       {children}
-      <Routes> 
+      <Routes>
         {subPages?.mapSubPages}
         {subPages?.orderSubPages}
         {subPages?.localBrandingSubPages}
@@ -62,4 +62,3 @@ function Router({ children }) {
 }
 
 export default Router;
-단
