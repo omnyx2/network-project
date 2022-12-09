@@ -1,0 +1,52 @@
+{
+    "orderCustomerName": "류현석",
+    "orderTotPrice": 44000,
+    "orderTimeAt": 0,
+    "isCancled": false,
+    "orderPickUpType": "직접수령",
+    "orderRequirements": "천천히 조심해서 오세요",
+    "orderState": "주문대기중",
+    "orderItems": [
+        {
+        "name": "찜닭",
+        "price": 20000,
+        "count": 1,
+        "isOrderable": true,
+        "tags": "대표",
+        "beforeTags": "인기"   ,
+        "options": [{
+                "title": "공기밥",
+                "count": 4
+            },{
+                "title": "주먹밥",
+                "count": 1
+            },{
+                "title": "당면",
+                "count": 2
+            },{
+                "title": "김치",
+                "count": 1
+            }]
+        },
+        {
+            "name": "로제파스타",
+            "price": 20000,
+            "count": 2,
+            "isOrderable": true,
+            "tags": "대표",
+            "beforeTags": "인기",
+            "options": [{
+                "title": "분모자",
+                "count": 2
+            },{
+                "title": "치즈",
+                "count": 1
+            },{
+                "title": "당면",
+                "count": 1
+            },{
+                "title": "단무지",
+                "count": 1
+            }]
+        }]
+}

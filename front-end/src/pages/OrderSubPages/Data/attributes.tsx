@@ -169,6 +169,22 @@ export const order_C: order = {
     orderState: "주문대기중"
 }
 
+export const orderDataExam = [
+    {...order_A}, {...order_B}, {...order_C}, 
+    {...order_A}, {...order_B}, {...order_C}, 
+    {...order_A}, {...order_B}, {...order_C}, 
+    {...order_A}, {...order_B}, {...order_C}, 
+    {...order_A}, {...order_B}, {...order_C}, 
+    {...order_A}, {...order_B}, {...order_C}, 
+    {...order_A}, {...order_B}, {...order_C}, 
+    {...order_A}, {...order_B}, {...order_C}, 
+    {...order_A}, {...order_B}, {...order_C}, 
+    {...order_A}, {...order_B}, {...order_C}, 
+    {...order_A}, {...order_B}, {...order_C}, 
+    {...order_A}, {...order_B}, {...order_C}, 
+    {...order_A}, {...order_B}, {...order_C}, 
+    {...order_A}, {...order_B}, {...order_C}]
+
 // const optionItem_A_1 =[{
 //     title: "공기밥",
 //     count: 4

@@ -11,7 +11,7 @@ import { mainRoutesList } from '../RouteManifast';
 
 
 const data = {
-    francchi: 2
+    francchiId: 2
 }
 
 export const ShopMainDataRecoil = atom({
