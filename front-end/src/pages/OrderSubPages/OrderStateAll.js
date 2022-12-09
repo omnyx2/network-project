@@ -15,9 +15,16 @@ import {
   QueryClient,
   QueryClientProvider,
 } from 'react-query'
-import { ShopMainDataRecoil } from '../../recoils/ShopMainDataRecoil.tsx';
-import { OrderAllDataRecoil } from  '../../recoils/ShopOrderDataRecoil.tsx';
+import { ShopMainDataRecoil } from '../../recoils/ShopMainDataRecoil.tsx'
 import { Loader, Text } from '@mantine/core';
+
+import { toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
+import io from "socket.io-client"; //모듈 가져오기
+import "react-toastify/dist/ReactToastify.css";
+const socket = io.connect("http://192.168.88.110:5000"); //백엔드 서버 포트를3001와 socket연결
+
+
 
 const DetailedRecipe = ({ selectedOrderItem, handleOnChangeOrderState }) => {
   const options = (_options) => {
@@ -52,7 +59,6 @@ const DetailedRecipe = ({ selectedOrderItem, handleOnChangeOrderState }) => {
 function OrderStateAll() {
   
   const [selectedOrder, setSelectedOrder] = useState({})
-  const [orderAllData, setOrderAllData ] = useRecoilState(OrderAllDataRecoil)
   const [mainData, setMainData] = useRecoilState(ShopMainDataRecoil)
 
   // Access the client
@@ -61,9 +67,8 @@ function OrderStateAll() {
   const { isLoading, isError, data, error } = useQuery('ordersList', () => axios.get(`order/francchi/${mainData.francchiId}`),{
     onSuccess: (response) => {
       console.log(response.data.data)
-      setOrderAllData(response.data.data)
-      // console.log(response.data.data)
-    }});
+    }
+  });
   
   // Mutations
   const mutations = useMutation( newData => {
@@ -77,15 +82,29 @@ function OrderStateAll() {
           orderCandle: "주문 취소"
         } 
       ]
-      data[idx][key] = changAbleValueList[valueTypeIdx][valueKey]
       console.log('send:', data)
-      return axios.post(`order/post/${orderId}`, data[idx]);
+      let newData1 = [...data]
+      newData1[idx][key] = changAbleValueList[valueTypeIdx][valueKey]
+      console.log('send:', newData1)
+      return axios.post(`order/post/${orderId}`, newData1[idx]);
     }, {
       onSuccess: (data) => {
         queryClient.invalidateQueries('ordersList')
     },
   });
+  useEffect(()=> {
+    socket.on("ServerToClient", (message) => {
+      console.log("STC", message)
+      //"receive message"라는 이벤트 받음(2) 
+  
+        toast.success(`Please Check New Order`)
+   
+    });
+    
+  },[])
+
  
+
   const handleOnChangeOrderState = (idx, key, valueTypeIdx, valueKey) => {
     const changAbleValueList = [
       {
@@ -102,7 +121,7 @@ function OrderStateAll() {
   
   const handleSelectedDetailedRecipe = (idx) => {
     // console.log(idx)
-    setSelectedOrder(orderAllData[idx])
+    setSelectedOrder(data?.data?.data[idx])
   }
 
   const handleOnUpdate = () => {
@@ -128,19 +147,25 @@ function OrderStateAll() {
   
   return (
     <div style={{ width: "100%", height: "100%" }}>
+     
       <GridLayout_1_1_LeftBigger 
         CompOne={
-          <UsersTable 
-            data={orderAllData} 
+          <>
+           <ToastContainer />
+           <UsersTable 
+            data={data?.data?.data} 
             StateChangingButton={<>a</>} 
             handleOnChangeOrderState={ mutations }
             handleSelectedDetailedRecipe ={ handleSelectedDetailedRecipe} 
-          />}
+          />
+          </>
+         }
         CompTwo={
           <DetailedRecipe 
             selectedOrderItem={selectedOrder}
           />} 
       />
+      
     </div>
   );
 }

@@ -78,9 +78,10 @@ function OrderStateCookingPage() {
           orderCandle: "주문 취소"
         } 
       ]
-      data[idx][key] = changAbleValueList[valueTypeIdx][valueKey]
-      console.log('send:', data)
-      return axios.post(`order/post/${orderId}`, data[idx]);
+   
+      const copyData = JSON.parse(JSON.stringify(data));
+      copyData[idx][key] = changAbleValueList[valueTypeIdx][valueKey]
+      return axios.post(`order/post/${orderId}`, copyData[idx]);
     }, {
       onSuccess: (data) => {
         queryClient.invalidateQueries('ordersList')

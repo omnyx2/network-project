@@ -61,7 +61,7 @@ function OrderStateFinishedPage() {
   const { isLoading, isError, data, error } = useQuery('ordersList', () => axios.get(`order/francchi/${mainData.francchiId}`),{
     onSuccess: (response) => {
       console.log(response.data.data)
-      let newData = response.data.data?.filter(e => e.orderState === "조리 시작")
+      let newData = response.data.data?.filter(e => e.orderState === "조리 완료")
       setOrderAllData(newData)
       // console.log(response.data.data)
     }});
@@ -78,9 +78,9 @@ function OrderStateFinishedPage() {
           orderCandle: "주문 취소"
         } 
       ]
-      data[idx][key] = changAbleValueList[valueTypeIdx][valueKey]
-      console.log('send:', data)
-      return axios.post(`order/post/${orderId}`, data[idx]);
+      const copyData = JSON.parse(JSON.stringify(data));
+      copyData[idx][key] = changAbleValueList[valueTypeIdx][valueKey]
+      return axios.post(`order/post/${orderId}`, copyData[idx]);
     }, {
       onSuccess: (data) => {
         queryClient.invalidateQueries('ordersList')

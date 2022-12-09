@@ -15,7 +15,7 @@ const initialValue =
 
 function HeadToolTips({ height }) {
   return (
-    <div style={height}>
+    <div style={{height: height }}>
       <Flex>
         <Button.Group>
           <UnstyledButton variant="white">
