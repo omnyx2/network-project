@@ -8,29 +8,32 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var __param = (this && this.__param) || function (paramIndex, decorator) {
-    return function (target, key) { decorator(target, key, paramIndex); }
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AlarmGateway = void 0;
 const websockets_1 = require("@nestjs/websockets");
 const socket_io_1 = require("socket.io");
 let AlarmGateway = class AlarmGateway {
     handleConnection(client) {
-        console.log('connected', client.id);
+        console.log(`⚡: ${client.id} user just connected!`);
         client.leave(client.id);
+        client.on("newEvent", (event) => {
+            console.log(event);
+        });
     }
     handleDisconnect(client) {
         console.log(client.data);
-        console.log('disonnected', client.id);
+        console.log('🔥: A user disconnected');
     }
-    async handleMessage(data) {
-        this.server.emit('ServerToClient', data);
-        console.log(data);
-    }
-    sendMessage(client, message) {
-        console.log({ id: client.id, message });
-        this.server.emit('getMessage', { id: client.id, message });
+    sendMessage(client, msg) {
+        console.log({ name: client.id, msg });
+        let x = "test";
+        let snippt = { name: msg.name, msg: msg.msg };
+        this.server.emit('ServerToClient', snippt);
+        client.emit("notification", {
+            title: "eventList[i].title",
+            hour: "eventList[i].hour",
+            mins: "eventList[i].minute",
+        });
     }
 };
 __decorate([
@@ -39,15 +42,8 @@ __decorate([
 ], AlarmGateway.prototype, "server", void 0);
 __decorate([
     (0, websockets_1.SubscribeMessage)('ClientToServer'),
-    __param(0, (0, websockets_1.MessageBody)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", Promise)
-], AlarmGateway.prototype, "handleMessage", null);
-__decorate([
-    (0, websockets_1.SubscribeMessage)('sendMessage'),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [socket_io_1.Socket, String]),
+    __metadata("design:paramtypes", [socket_io_1.Socket, Object]),
     __metadata("design:returntype", void 0)
 ], AlarmGateway.prototype, "sendMessage", null);
 AlarmGateway = __decorate([

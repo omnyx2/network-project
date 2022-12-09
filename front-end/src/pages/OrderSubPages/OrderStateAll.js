@@ -22,9 +22,10 @@ import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import io from "socket.io-client"; //모듈 가져오기
 import "react-toastify/dist/ReactToastify.css";
-const socket = io.connect("http://192.168.88.110:5000"); //백엔드 서버 포트를3001와 socket연결
 
+import { SOCKET_URL } from '../../configs';
 
+const socket = io.connect(SOCKET_URL); //백엔드 서버 포트를3001와 socket연결
 
 const DetailedRecipe = ({ selectedOrderItem, handleOnChangeOrderState }) => {
   const options = (_options) => {
@@ -66,7 +67,13 @@ function OrderStateAll() {
   // Queries
   const { isLoading, isError, data, error } = useQuery('ordersList', () => axios.get(`order/francchi/${mainData.francchiId}`),{
     onSuccess: (response) => {
-      console.log(response.data.data)
+      
+      response.data.data.sort(function(a, b){
+        a = new Date(a.orderTimeAt);
+        b = new Date(b.orderTimeAt);
+        return a>b ? -1 : a<b ? 1 : 0;
+    })
+    console.log(response.data.data)
     }
   });
   
@@ -96,8 +103,7 @@ function OrderStateAll() {
     socket.on("ServerToClient", (message) => {
       console.log("STC", message)
       //"receive message"라는 이벤트 받음(2) 
-  
-        toast.success(`Please Check New Order`)
+      toast.success(`Please Check New Order`)
    
     });
     

@@ -80,7 +80,7 @@ export class OrderService {
         //console.log("do")
 
         console.log(order.francchi);
-        this.gd.server.emit('getMessage',{ "message":"new order in " + (await this.francchiService.findOne(order.francchi_id)).name});
+        this.gd.server.emit('ServerToClient',{ name:"", msg:"!  Alarm : new order in " + (await this.francchiService.findOne(order.francchi_id)).name+"  !"});
         try{
 
             for(let i=0;i<order.orderItems.length;i++)

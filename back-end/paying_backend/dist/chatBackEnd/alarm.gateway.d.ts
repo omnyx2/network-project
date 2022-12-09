@@ -4,6 +4,5 @@ export declare class AlarmGateway implements OnGatewayConnection, OnGatewayDisco
     server: Server;
     handleConnection(client: Socket): void;
     handleDisconnect(client: Socket): void;
-    handleMessage(data: any): Promise<void>;
-    sendMessage(client: Socket, message: string): void;
+    sendMessage(client: Socket, msg: any): void;
 }

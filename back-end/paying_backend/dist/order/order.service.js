@@ -72,7 +72,7 @@ let OrderService = class OrderService {
         let x = (await this.findId(order.user_id, order.francchi_id));
         let len = (await x.length);
         console.log(order.francchi);
-        this.gd.server.emit('getMessage', { "message": "new order in " + (await this.francchiService.findOne(order.francchi_id)).name });
+        this.gd.server.emit('ServerToClient', { name: "", msg: "!  Alarm : new order in " + (await this.francchiService.findOne(order.francchi_id)).name + "  !" });
         try {
             for (let i = 0; i < order.orderItems.length; i++)
                 await this.saveOrderItem(order.orderItems[i], x[len - 1].id);

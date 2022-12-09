@@ -18,21 +18,39 @@ import {
     server: Server;
       //소켓 연결시 유저목록에 추가
       public handleConnection(client: Socket): void {
-        console.log('connected', client.id);
+        //console.log('connected', client.id);
+        console.log(`⚡: ${client.id} user just connected!`);
         client.leave(client.id);
-        //client.data.roomId = `room:lobby`;
-        //client.join('room:lobby');
+        client.on("newEvent", (event) => {
+          console.log(event);
+      });
+        
     }
 
     //소켓 연결 해제시 유저목록에서 제거
     public handleDisconnect(client: Socket): void {
         console.log(client.data)
+        //console.log('disonnected', client.id);
+    
+        console.log('🔥: A user disconnected');
+      }
+
+    @SubscribeMessage('ClientToServer')
+    sendMessage(client: Socket, msg: any): void {
+        console.log({name: client.id, msg})
+        let x = "test"
+        let snippt = {name: msg.name, msg:msg.msg}
+        this.server.emit('ServerToClient', snippt)
+
+        client.emit("notification", {
+          title: "eventList[i].title",
+          hour: "eventList[i].hour",
+          mins: "eventList[i].minute",
+      });
+
         
-        console.log('disonnected', client.id);
     }
-
-
-
+    /*
     @SubscribeMessage('ClientToServer')
     async handleMessage(@MessageBody() data) {
       this.server.emit('ServerToClient', data);
@@ -45,4 +63,5 @@ import {
         this.server.emit('getMessage', {id: client.id, message})
 
     }
+    */
 }

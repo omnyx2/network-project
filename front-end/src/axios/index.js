@@ -1,7 +1,9 @@
 import axios from "axios";
+import { SERVER_URL } from '../configs';
 
+ 
 const instance = axios.create({
-  baseURL: "http://192.168.88.110:3000/",
+  baseURL: SERVER_URL,
   timeout: 1000,
   headers: {
     "X-Custom-Header": "foobar",

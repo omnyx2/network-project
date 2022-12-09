@@ -4,7 +4,7 @@ import "./App.css";
 import "./menu.css";
 import { Text, Input, Flex, Button, Container } from "@mantine/core";
 import axios from "axios";
-
+import { SERVER_URL } from "./configs";
 import { useQuery, useMutation } from "react-query";
 
 import { francchiMenusExample } from "./attributes";
@@ -73,13 +73,7 @@ const tempData = {
     },
   ],
 };
-
-const instance = axios.create({
-  baseURL: "https://some-domain.com/api/",
-  timeout: 1000,
-  headers: { "Content-Type": "application/json" },
-});
-
+ 
 function getMenus(url: string) {
   return axios({
     method: "get",
@@ -133,10 +127,10 @@ function App() {
   const [savedOrders, setSavedOrders] = useState<any[]>([]);
 
   const [focused, setFocused] = useState(false);
-  const server_url = "192.168.88.110";
+  const server_url = SERVER_URL;
   const francchi_id = 2;
-  const url = `http://${server_url}:3000/product/francchi/${francchi_id}`;
-  const url_order = `http://${server_url}:3000/order/${francchi_id}`;
+  const url = `${server_url}/product/francchi/${francchi_id}`;
+  const url_order = `${server_url}/order/${francchi_id}`;
   useEffect(() => {}, [menusData]);
 
   const { isLoading, isError, data, error } = useQuery(
@@ -174,7 +168,7 @@ function App() {
         const handleMenu = francchiMenusExample.map((e: any, idx: any) => {
           return {
             id: e.id,
-            name: e.name,
+            name: e.name, 
             price: e.price,
             count: 0,
             options: e.options.map((option: any, idx: any) => {

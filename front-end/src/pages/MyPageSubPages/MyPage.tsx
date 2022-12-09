@@ -5,11 +5,13 @@ import { toast } from "react-toastify";
 import { ToastContainer } from "react-toastify";
 import io from "socket.io-client"; //모듈 가져오기
 import "react-toastify/dist/ReactToastify.css";
-const socket = io.connect("http://192.168.88.110:5000"); //백엔드 서버 포트를3001와 socket연결
+import { SOCKET_URL } from '../../configs';
+
+const socket = io.connect(SOCKET_URL);
 
 class MyPage extends Component {
+
   constructor(props) {
-    
     super(props);
     this.state = {
       name: "", //id
@@ -39,11 +41,11 @@ class MyPage extends Component {
       });
       
     });
-    socket.on("notification", (data) =>{ 
-      toast.success(` It's time for ${data.title}`)
-    });
+    // socket.on("notification", (data) =>{ 
+    //   toast.success(` It's time for ${data.title}`)
+    // });
     
-    // socket.on("newOrder", (newOrder) => {
+    // // socket.on("newOrder", (newOrder) => {
     //   console.log(newOrder)
     //   //"receive message"라는 이벤트 받음(2)
     //   this.setState({
