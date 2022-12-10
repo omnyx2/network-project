@@ -39,12 +39,12 @@ AppModule = __decorate([
     (0, common_1.Module)({
         imports: [alarm_module_1.ChatBackEndModule,
             typeorm_1.TypeOrmModule.forRoot({
-                type: 'mysql',
+                type: 'postgres',
                 host: 'localhost',
-                port: 3306,
-                username: 'root',
-                password: 'pw123',
-                database: 'test',
+                port: 5432,
+                username: 'postgres',
+                password: '',
+                database: 'testDB',
                 entities: [user_entity_1.User, francchi_entity_1.Francchi, product_entity_1.Product, order_entity_1.Order, order_item_entity_1.OrderItem, option_item_entity_1.OptionItem, workingdate_entity_1.WorkingDate, product_option_entity_1.ProductOption],
                 synchronize: true,
             }),

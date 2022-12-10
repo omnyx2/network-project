@@ -30,12 +30,12 @@ import { ChatBackEndModule } from './chatBackEnd/alarm.module';
 @Module({
     imports: [ChatBackEndModule, 
         TypeOrmModule.forRoot({
-            type: 'mysql',
+            type: 'postgres',
             host: 'localhost',
-            port: 3306,
-            username: 'root',
-            password: 'pw123',
-            database: 'test',
+            port: 5432,
+            username: 'postgres',
+            password: '',
+            database: 'testDB',
             entities: [User, Francchi, Product, Order, OrderItem, OptionItem, WorkingDate, ProductOption], // 사용할 entity의 클래스명을 넣어둔다.
             synchronize: true, // false로 해두는 게 안전하다.
           }),
