@@ -39,3 +39,18 @@ Our order process run py this step
     3.3.1 "주문 전체 창" shows all orders
     3.3.2 depends of the state of order, you can see only on selected state order by press menu "주문 접수 대기", "조리 중", "주문 완료"
     3.3.3 "오늘 주문 내역" is not implemented.
+
+
+# Dummy Data
+
+For convience we made a Dummy Data for this project you can easily use make Dummy Data. Go to backend/dummy_data and open the folders and fix url and send data to server
+you just can push data with bellow command
+```
+yarn install
+node index.js
+```
+
+# For DB
+You can use Mysql or Postgres both. but when you use postgres in backend/paying_backend `yarn add pg` will require.
+Thanks :) hope you enjoy our server
+
