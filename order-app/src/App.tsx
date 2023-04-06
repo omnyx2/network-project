@@ -73,7 +73,7 @@ const tempData = {
     },
   ],
 };
- 
+
 function getMenus(url: string) {
   return axios({
     method: "get",
@@ -168,7 +168,7 @@ function App() {
         const handleMenu = francchiMenusExample.map((e: any, idx: any) => {
           return {
             id: e.id,
-            name: e.name, 
+            name: e.name,
             price: e.price,
             count: 0,
             options: e.options.map((option: any, idx: any) => {
@@ -300,6 +300,44 @@ function App() {
     });
   };
 
+  const UserInfoForm = () => {
+    return (
+      <>
+        <div className="menu-item">
+          <div className="option-container">
+            <div className="block-container">
+              <Text fz="md" fw={700}>
+                연락처
+              </Text>
+              <Input
+                placeholder="0"
+                onFocus={() => setFocused(true)}
+                onBlur={() => setFocused(false)}
+                onChange={() => {}}
+              />
+              <Button>인증</Button>
+            </div>
+          </div>
+        </div>
+        <div className="menu-item">
+          <div className="option-container">
+            <div className="block-container">
+              <Text fz="md" fw={700}>
+                성함
+              </Text>
+              <Input
+                placeholder="홍길동"
+                onFocus={() => setFocused(true)}
+                onBlur={() => setFocused(false)}
+                onChange={() => {}}
+              />
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  };
+
   const menuRenderer = menusData?.map((item, idx) => {
     return (
       <div className="menu-item">
@@ -341,8 +379,10 @@ function App() {
       </div>
     );
   });
+
   return (
     <div className="back-color-container">
+      <UserInfoForm />
       {menuRenderer}
       <div className="order-send-container">
         <Button fullWidth size="md" onClick={() => sendOrder()}>

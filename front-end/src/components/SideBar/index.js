@@ -6,20 +6,11 @@ import {
   Tooltip,
   Title,
 } from "@mantine/core";
-import {
-  IconHome2,
-  IconGauge,
-  IconDeviceDesktopAnalytics,
-  IconFingerprint,
-  IconCalendarStats,
-  IconUser,
-  IconSettings,
-} from "@tabler/icons";
-import { useRecoilState } from "recoil";
-import { mapActiveSubComponent } from "../../recoils/RecoilsList.tsx";
 import { MantineLogo } from "@mantine/ds";
 
 import { Link } from "react-router-dom";
+import { authComponent } from "../../pages/LoginPage/LoginRecoil.tsx";
+import { useRecoilState } from "recoil";
 import { mainRoutesList, mainRoutesListArray } from "../../RouteManifast";
 
 const useStyles = createStyles((theme) => ({
@@ -160,15 +151,15 @@ export function DoubleNavbar() {
   // 현재 선택된 라우팅 객체 지정
   const [activeNavItem, setActiveItem] = useState(mainRoutesListArray[0]);
   const [activeMainRoute, setAtiveMainRoute] = useState(mainRoutesListArray[0]);
-
+  const [isAuth, setAuthComponent] = useRecoilState(authComponent);
   // 현재 선택된 서브 라우팅 객체 기억
   const [activeSubPageUrls, setActiveSubPageUrls] = useState([
-    makeUrl(0, 0),
+    // makeUrl(0, 0),
     makeUrl(1, 0),
     makeUrl(2, 0),
     makeUrl(3, 0),
     makeUrl(4, 0),
-    makeUrl(5, 0),
+    // makeUrl(5, 0),
   ]);
 
   const baseUrl = "localhost:3000";
@@ -227,7 +218,7 @@ export function DoubleNavbar() {
   ));
 
   return (
-    <Navbar height={'100%'} width={{ sm: 300 }}>
+    <Navbar height={"100%"} width={{ sm: 300 }}>
       <Navbar.Section grow className={classes.wrapper}>
         <div className={classes.aside}>
           <div className={classes.logo}>
@@ -240,6 +231,15 @@ export function DoubleNavbar() {
             {active}
           </Title>
           {links}
+        </div>
+      </Navbar.Section>
+      <Navbar.Section>
+        <div
+          onClick={() => {
+            setAuthComponent(false);
+          }}
+        >
+          logout
         </div>
       </Navbar.Section>
     </Navbar>

@@ -14,8 +14,8 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const users_module_1 = require("./users/users.module");
 const francchi_module_1 = require("./francchi/francchi.module");
-const product_module_1 = require("./product/product.module");
 const order_module_1 = require("./order/order.module");
+const product_module_1 = require("./product/product.module");
 const order_item_module_1 = require("./order-item/order-item.module");
 const option_item_module_1 = require("./option-item/option-item.module");
 const workingdate_module_1 = require("./workingdate/workingdate.module");
@@ -37,7 +37,8 @@ let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [alarm_module_1.ChatBackEndModule,
+        imports: [
+            alarm_module_1.ChatBackEndModule,
             typeorm_1.TypeOrmModule.forRoot({
                 type: 'postgres',
                 host: 'localhost',
@@ -45,7 +46,16 @@ AppModule = __decorate([
                 username: 'postgres',
                 password: '',
                 database: 'testDB',
-                entities: [user_entity_1.User, francchi_entity_1.Francchi, product_entity_1.Product, order_entity_1.Order, order_item_entity_1.OrderItem, option_item_entity_1.OptionItem, workingdate_entity_1.WorkingDate, product_option_entity_1.ProductOption],
+                entities: [
+                    user_entity_1.User,
+                    francchi_entity_1.Francchi,
+                    product_entity_1.Product,
+                    order_entity_1.Order,
+                    order_item_entity_1.OrderItem,
+                    option_item_entity_1.OptionItem,
+                    workingdate_entity_1.WorkingDate,
+                    product_option_entity_1.ProductOption,
+                ],
                 synchronize: true,
             }),
             users_module_1.UsersModule,

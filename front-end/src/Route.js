@@ -6,7 +6,7 @@ let instance = null;
 class SubPageRoutesSingleTon {
   constructor() {
     if (instance) return instance;
-    this.mapSubPages = this.genSubPages(mainRoutesList, "map");
+    // this.mapSubPages = this.genSubPages(mainRoutesList, "map");
     this.orderSubPages = this.genSubPages(mainRoutesList, "order");
     this.localBrandingSubPages = this.genSubPages(
       mainRoutesList,
@@ -20,7 +20,7 @@ class SubPageRoutesSingleTon {
 
   subPages() {
     return {
-      mapSubPages: this.mapSubPages,
+      //  mapSubPages: this.mapSubPages,
       orderSubPages: this.orderSubPages,
       localBrandingSubPages: this.localBrandingSubPages,
       shopInfoSubPages: this.shopInfoSubPages,
@@ -50,7 +50,7 @@ function Router({ children }) {
     <BrowserRouter>
       {children}
       <Routes>
-        {subPages?.mapSubPages}
+        {/* {subPages?.mapSubPages} */}
         {subPages?.orderSubPages}
         {subPages?.localBrandingSubPages}
         {subPages?.shopInfoSubPages}

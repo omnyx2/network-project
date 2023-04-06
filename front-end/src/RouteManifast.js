@@ -1,11 +1,11 @@
 import React from "react";
 
-import MapPage from "./pages/MapSubPages/MapPage.tsx";
-import MapSearchPage from "./pages/MapSubPages/MapSearchPage.tsx";
-import MapHistoryPage from "./pages/MapSubPages/MapHistoryPage.tsx";
-import MapAsList from "./pages/MapSubPages/MapAsList.tsx";
+// import MapPage from "./pages/MapSubPages/MapPage.tsx";
+// import MapSearchPage from "./pages/MapSubPages/MapSearchPage.tsx";
+// import MapHistoryPage from "./pages/MapSubPages/MapHistoryPage.tsx";
+// import MapAsList from "./pages/MapSubPages/MapAsList.tsx";
 
-import OrderStateAll from './pages/OrderSubPages/OrderStateAll'
+import OrderStateAll from "./pages/OrderSubPages/OrderStateAll";
 import OrderStateWaitingPage from "./pages/OrderSubPages/OrderStateWaitingPage";
 import OrderStateCookingPage from "./pages/OrderSubPages/OrderStateCookingPage";
 import OrderStateFinishedPage from "./pages/OrderSubPages/OrderStateFinishedPage";
@@ -17,8 +17,8 @@ import ShopInnerPicturePage from "./pages/LocalBrandingPages/ShopInnerPicturePag
 import ShopOuterPicturePage from "./pages/LocalBrandingPages/ShopOuterPicturePage.tsx";
 
 import ShopWorkingInfoPage from "./pages/ShopInfoPages/ShopWorkingInfoPage.tsx";
-import ShopInfoPage from './pages/ShopInfoPages/ShopInfoPage.tsx';
-import ShopSalesInfoPage from './pages/ShopInfoPages/ShopSalesInfoPage.tsx';
+import ShopInfoPage from "./pages/ShopInfoPages/ShopInfoPage.tsx";
+import ShopSalesInfoPage from "./pages/ShopInfoPages/ShopSalesInfoPage.tsx";
 
 import MyPage from "./pages/MyPageSubPages/MyPage.tsx";
 
@@ -37,32 +37,32 @@ const EmptyComp = ({ title }) => {
 };
 // 각 서브페이지는 동일한 헤더를 가진다
 const firstNestSubPages = {
-  mapSubPages: [
-    {
-      label: "지도보기",
-      key: "map",
-      link: "/map",
-      component: <MapPage />,
-    },
-    {
-      label: "검색창",
-      key: "search",
-      link: "/search",
-      component: <MapSearchPage />,
-    },
-    {
-      label: "히스토리",
-      key: "history",
-      link: "/history",
-      component: <MapHistoryPage />,
-    },
-    {
-      label: "리스트로 보기",
-      key: "list",
-      link: "/list",
-      component: <MapAsList />,
-    },
-  ],
+  // mapSubPages: [
+  //   {
+  //     label: "지도보기",
+  //     key: "map",
+  //     link: "/map",
+  //     component: <MapPage />,
+  //   },
+  //   {
+  //     label: "검색창",
+  //     key: "search",
+  //     link: "/search",
+  //     component: <MapSearchPage />,
+  //   },
+  //   {
+  //     label: "히스토리",
+  //     key: "history",
+  //     link: "/history",
+  //     component: <MapHistoryPage />,
+  //   },
+  //   {
+  //     label: "리스트로 보기",
+  //     key: "list",
+  //     link: "/list",
+  //     component: <MapAsList />,
+  //   },
+  // ],
   orderSubPages: [
     {
       label: "주문 전체창",
@@ -146,7 +146,7 @@ const firstNestSubPages = {
       label: "내꿈궈",
       key: "my_page",
       link: "/my_page",
-      component: <MyPage/>,
+      component: <MyPage />,
     },
   ],
   settingSubPages: [
@@ -160,14 +160,14 @@ const firstNestSubPages = {
 };
 
 export const mainRoutesList = {
-  map: {
-    icon: IconHome2,
-    label: "맵",
-    keyLabel: "map",
-    link: "/map",
-    mainComponent: firstNestSubPages.mapSubPages[0].component,
-    subPages: firstNestSubPages.mapSubPages,
-  },
+  // map: {
+  //   icon: IconHome2,
+  //   label: "맵",
+  //   keyLabel: "map",
+  //   link: "/map",
+  //   mainComponent: firstNestSubPages.mapSubPages[0].component,
+  //   subPages: firstNestSubPages.mapSubPages,
+  // },
   order: {
     icon: IconGauge,
     label: "주문",
