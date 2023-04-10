@@ -10,7 +10,12 @@ import {
 } from "@mantine/core";
 
 import { useRecoilState } from "recoil";
-import { authComponent } from "./LoginRecoil.tsx";
+import {
+  authComponent,
+  authPendingComponent,
+  authJWTKeyComponent,
+} from "./LoginRecoil.tsx";
+
 import {
   PasswordInput,
   Text,
@@ -19,6 +24,9 @@ import {
   Anchor,
   Center,
 } from "@mantine/core";
+
+import sendAuth from "./LoginAxiosRequest.tsx";
+import { useQuery } from "react-query";
 
 export function AutocompleteLoading({ value, setValue }) {
   const timeoutRef = useRef<number>(-1);
@@ -45,6 +53,7 @@ export function AutocompleteLoading({ value, setValue }) {
       }, 1000);
     }
   };
+
   return (
     <Autocomplete
       value={value}
@@ -96,10 +105,19 @@ export function ForgotPasswordInput({
   );
 }
 
+interface authDto {
+  email: String;
+  password: String;
+}
+
 function AuthPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isAuth, setAuthComponent] = useRecoilState(authComponent);
+  const [accessJwtToken, setAccessJwtToken] =
+    useRecoilState(authJWTKeyComponent);
+  const [isAuthPending, setAuthPendingComponent] =
+    useRecoilState(authPendingComponent);
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
@@ -107,24 +125,47 @@ function AuthPage() {
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
-
-  const handleLogin = (event) => {
+  // isAuth, isAUthPending 전부 관리
+  const handleLogin = async (event) => {
     event.preventDefault();
-    setAuthComponent(!isAuth);
-    auth
-      .signInWithEmailAndPassword(email, password)
-      .then((userCredential) => {
-        // User is signed in.
+    // 스피너를 위해서 로그인 시작 표시
+    setAuthPendingComponent(true);
 
-        const user = userCredential.user;
-        console.log(user);
+    await sendAuth({ email, password })
+      .then(function (response) {
+        // 스피너를 위해서 로그인 끝표시
+        // 받아서 등록
+        console.log(response);
+        setAuthPendingComponent(false);
+        setAuthComponent(true);
+        setAccessJwtToken(response.jwtAccessString);
+
+        return response;
       })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
+      .catch(function (error) {
+        if (error.response) {
+          // 요청이 전송되었고, 서버는 2xx 외의 상태 코드로 응답했습니다.
+          console.log(error.response.data);
+          console.log(error.response.status);
+          console.log(error.response.headers);
+          setAuthPendingComponent(false);
+          setAuthComponent(false);
+
+          return error.response.status;
+        } else if (error.request) {
+          // 요청이 전송되었지만, 응답이 수신되지 않았습니다.
+          // 'error.request'는 브라우저에서 XMLHtpRequest 인스턴스이고,
+          // node.js에서는 http.ClientRequest 인스턴스입니다.
+          console.log(error.request);
+          return "not arrived";
+        } else {
+          // 오류가 발생한 요청을 설정하는 동안 문제가 발생했습니다.
+          console.log("Error", error.message);
+        }
+        console.log(error.config);
       });
   };
+
   return (
     <div
       style={{

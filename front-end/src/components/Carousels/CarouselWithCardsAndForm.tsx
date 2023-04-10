@@ -15,7 +15,7 @@ import {
   ThemeIcon,
 } from "@mantine/core";
 
-import ShopInnerSubmitForm from '../Forms/ShopInnerSubmitForm.tsx'
+import ShopInnerSubmitForm from "../Forms/ShopInnerSubmitForm.tsx";
 import { IconTrash } from "@tabler/icons";
 import { relative } from "node:path/win32";
 const useStyles = createStyles((theme) => ({
@@ -47,10 +47,10 @@ const useStyles = createStyles((theme) => ({
 
   delete: {
     zIndex: 1000000,
-    position: 'relative',
+    position: "relative",
     top: 1,
     left: 14,
-  }
+  },
 }));
 
 interface CardProps {
@@ -61,7 +61,7 @@ interface CardProps {
 
 function Card({ image, title, article, category, children }: CardProps) {
   const { classes } = useStyles();
-  const [opened, setOpened] = useState(false)
+  const [opened, setOpened] = useState(false);
   return (
     <Paper
       shadow="md"
@@ -71,14 +71,12 @@ function Card({ image, title, article, category, children }: CardProps) {
       className={classes.card}
     >
       <div>
-      
         <Text className={classes.category} size="xs">
-            {category}    
+          {category}
         </Text>
         <Title order={3} className={classes.title}>
           {title}
         </Title>
-        
       </div>
       <Group position="center">
         <Modal
@@ -86,45 +84,46 @@ function Card({ image, title, article, category, children }: CardProps) {
           onClose={() => setOpened(false)}
           title={category}
         >
-          { article }
+          {article}
         </Modal>
       </Group>
       <Flex>
-      <Button variant="white" color="dark" onClick={() => setOpened(true)}>
+        <Button variant="white" color="dark" onClick={() => setOpened(true)}>
           Read article
-      </Button>
-      {children}
+        </Button>
       </Flex>
-      
-      
-      
     </Paper>
   );
 }
 
-export function CarouselWithCardsAndForm({cardData, setCardData, deleteCardData}) {
+export function CarouselWithCardsAndForm({
+  cardData,
+  setCardData,
+  deleteCardData,
+}) {
   const theme = useMantineTheme();
   const { classes } = useStyles();
 
-  useEffect(()=> {
-
-  },[cardData])
+  useEffect(() => {}, [cardData]);
   const mobile = useMediaQuery(`(max-width: ${theme.breakpoints.sm}px)`);
 
   const slides = cardData?.map((item, idx) => (
     <Carousel.Slide key={item.title}>
-     
-      <Card {...item} >
-        <ThemeIcon 
-          className={classes.delete} 
-          size="lg" 
+      <Card {...item}>
+        <ThemeIcon
+          className={classes.delete}
+          size="lg"
           onClick={() => deleteCardData(idx)}
-          variant="gradient" 
-          gradient={{ from: 'teal', to: 'lime', deg: 105 }}>
-          <IconTrash size={20} /> 
+          variant="gradient"
+          gradient={{ from: "teal", to: "lime", deg: 105 }}
+        >
+          <IconTrash size={20} />
         </ThemeIcon>
-        </Card>
-      <ShopInnerSubmitForm {...item} setRecoilData={(value)=> setCardData(value, idx)}/>
+      </Card>
+      <ShopInnerSubmitForm
+        {...item}
+        setRecoilData={(value) => setCardData(value, idx)}
+      />
     </Carousel.Slide>
   ));
 
