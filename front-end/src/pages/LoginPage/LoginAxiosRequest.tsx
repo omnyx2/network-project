@@ -7,7 +7,7 @@ const authUrl = "http://localhost:3000/users/login/LocalOrder";
 interface authDto {
   email: String;
   password: String;
-  // affiliatedInstitutions: String;
+// affiliatedInstitutions: String;
 }
 
 // axios랑
